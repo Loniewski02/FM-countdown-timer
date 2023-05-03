@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/css/style.min.css">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./dist/img/icons/favicon-32x32.png">
+
+  <title>Frontend Mentor | Launch countdown timer</title>
+</head>
+
+<body>
+  <main class="main">
+    <section class="app">
+      <h1 class="app__heading"> We're launching soon</h1>
+      <div class="app__body">
+        <button aria-label="settings" class="app__body-settings"><img src="./dist/img/icons/settings_icon.svg"
+            alt=""></button>
+        <div class="app__body-box">
+          <div class="app__body-card app__body-card--days">
+            <div class="app__body-card-top"><span class="days">00</span></div>
+            <div class="app__body-card-bottom"><span class="days">00</span>
+            </div>
+            <div class="circle circle--left"></div>
+            <div class="circle circle--right"></div>
+          </div>
+          <p class="app__body-text app__body-text--days">Days</p>
+        </div>
+
+        <div class="app__body-box">
+          <div class="app__body-card app__body-card--hours">
+            <div class="app__body-card-top"><span class="hours">00</span></div>
+            <div class="app__body-card-bottom"><span class="hours">00</span>
+            </div>
+            <div class="circle circle--left"></div>
+            <div class="circle circle--right"></div>
+          </div>
+          <p class="app__body-text app__body-text--hours">Hours</p>
+        </div>
+
+        <div class="app__body-box">
+          <div class="app__body-card app__body-card--minutes">
+            <div class="app__body-card-top"><span class="minutes">00</span></div>
+            <div class="app__body-card-bottom"><span class="minutes">00</span>
+            </div>
+            <div class="circle circle--left"></div>
+            <div class="circle circle--right"></div>
+          </div>
+          <p class="app__body-text app__body-text--minutes">minutes</p>
+        </div>
+
+        <div class="app__body-box">
+          <div class="app__body-card app__body-card--seconds">
+            <div class="app__body-card-top"><span class="seconds">00</span></div>
+            <div class="app__body-card-bottom"><span class="seconds">00</span>
+            </div>
+            <div class="circle circle--left"></div>
+            <div class="circle circle--right"></div>
+          </div>
+          <p class="app__body-text app__body-text--seconds">seconds</p>
+        </div>
+
+      </div>
+      <div class="app__socials">
+        <a href="#" aria-label="facebook" class="app__socials-link"><img src="./dist/img/icons/icon-facebook.svg"
+            alt=""></a>
+        <a href="#" aria-label="pinterest" class="app__socials-link"><img src="./dist/img/icons/icon-pinterest.svg"
+            alt=""></a>
+        <a href="#" aria-label="instagram" class="app__socials-link"><img src="./dist/img/icons/icon-instagram.svg"
+            alt=""></a>
+      </div>
+    </section>
+
+    <div class="popup">
+      <div class="popup__main">
+        <div class="popup__main-box">
+          <label for="name">Enter the name of the event</label>
+          <input id="name" type="text">
+          <p class="error-info">error</p>
+        </div>
+        <div class="popup__main-box">
+          <label for="date">Enter the date of the event</label>
+          <input id="date" type="date">
+          <p class="error-info">error</p>
+        </div>
+        <button class="popup__main-confirm">Confirm</button>
+        <button class="popup__main-close"></button>
+      </div>
+    </div>
+  </main>
+  <script src="./dist/js/main.min.js"></script>
+</body>
+
+</html>

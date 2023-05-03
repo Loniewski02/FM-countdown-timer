@@ -1,0 +1,427 @@
+@use './colors' as *;
+
+@mixin linksActive {
+	&:focus {
+		outline: none;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -5px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+		height: 2px;
+		background-color: $soft-red;
+		transition: width 0.3s;
+	}
+
+	&:hover::after,
+	&:focus::after {
+		width: 50%;
+	}
+
+	&:hover,
+	&:focus {
+		filter: brightness(0) saturate(100%) invert(48%) sepia(68%) saturate(719%) hue-rotate(302deg) brightness(101%)
+			contrast(97%);
+	}
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+	-webkit-scroll-behavior: smooth;
+}
+
+body {
+	min-height: 100vh;
+	font-family: 'Red Hat Text', sans-serif;
+	font-size: 1.6rem;
+	background-color: $very-dark-blue;
+	background-image: url('../img/icons/bg-stars.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.circle {
+	position: absolute;
+	top: 50%;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: $very-dark-mostly-black-blue;
+
+	&--left {
+		left: 0;
+		transform: translate(-50%, -100%);
+	}
+
+	&--right {
+		right: 0;
+		transform: translate(50%, -100%);
+	}
+}
+
+.animation-bottom {
+	animation: rotate-bottom 0.4s ease-out 0.5s;
+}
+
+.animation-top {
+	animation: rotate-top 0.5s ease-in;
+}
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1em;
+	height: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	transition: width 0.3s, height 0.3s, opacity 0.3s;
+	opacity: 0;
+
+	&--active {
+		height: 100%;
+		opacity: 1;
+
+		.popup__main {
+			display: grid;
+		}
+	}
+
+	&__main {
+		position: relative;
+		display: none;
+		padding: 6em 2em 3em;
+		max-width: 400px;
+		background-color: $very-dark-mostly-black-blue;
+		background-image: url('../img/icons/bg-stars.svg');
+		background-size: cover;
+		border-radius: 10px;
+
+		label {
+			font-size: 1.6rem;
+			color: $white;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+		}
+
+		input {
+			margin: 1em 0 0;
+			padding: 0.2em 0.5em;
+			width: 100%;
+			font-family: inherit;
+			font-size: 1.6rem;
+			border: 2px solid transparent;
+			border-radius: 8px;
+		}
+
+		.error-info {
+			font-size: 1.3rem;
+			color: $soft-red;
+			justify-self: end;
+			margin-bottom: 2em;
+			visibility: hidden;
+		}
+
+		&-box {
+			display: grid;
+
+			&--error {
+				input {
+					border: 2px solid $soft-red;
+				}
+				.error-info {
+					visibility: visible;
+				}
+			}
+		}
+
+		&-confirm {
+			padding: 0.8em 1em;
+			width: 50%;
+			justify-self: end;
+			border-radius: 2em;
+			border: 2px solid transparent;
+			background-color: $soft-red;
+			transition: border 0.3s, background-color 0.3s;
+			cursor: pointer;
+
+			&:focus {
+				outline: 2px dashed $soft-red;
+			}
+
+			&:hover,
+			&:focus {
+				background-color: $white;
+				border: 2px solid $soft-red;
+			}
+		}
+
+		&-close {
+			position: absolute;
+			right: 0.5em;
+			top: 0.5em;
+			background-color: transparent;
+			width: 30px;
+			height: 30px;
+			border: none;
+			cursor: pointer;
+
+			&:focus {
+				outline: none;
+			}
+
+			&:hover::before,
+			&:hover::after,
+			&:focus::after,
+			&:focus::before {
+				background-color: $soft-red;
+			}
+
+			&::after,
+			&::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				width: 30px;
+				height: 2px;
+				background-color: $white;
+				transition: background-color 0.3s;
+			}
+
+			&::after {
+				transform: rotate(45deg);
+			}
+
+			&::before {
+				transform: rotate(-45deg);
+			}
+		}
+	}
+}
+
+.app {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 5.2em 1em 0;
+	width: 100%;
+	min-height: 100vh;
+	background-image: url('../img/icons/pattern-hills.svg');
+	background-repeat: no-repeat;
+	background-position: 85% 100%;
+	background-size: auto 25%;
+
+	&__heading {
+		text-align: center;
+		font-size: 1.8rem;
+		color: $white;
+		text-transform: uppercase;
+		letter-spacing: 6px;
+		font-weight: 700;
+	}
+
+	&__body {
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: center;
+		gap: 1em;
+		margin-top: 3.5em;
+
+		&-settings {
+			position: absolute;
+			right: 0;
+			top: 0;
+			transform: translateY(-150%);
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			@include linksActive;
+		}
+
+		&-box {
+			text-align: center;
+		}
+
+		&-card {
+			position: relative;
+			width: 70px;
+			height: 71px;
+			background-color: $very-dark-mostly-black-blue;
+			border-radius: 4px 4px 8px 8px;
+			overflow: hidden;
+
+			&-bottom,
+			&-top {
+				position: relative;
+				background-color: $dark-desaturated-blue;
+				height: 33px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				overflow: hidden;
+
+				span {
+					position: absolute;
+					font-size: 3.6rem;
+					color: $soft-red;
+				}
+			}
+
+			&-top {
+				transform-origin: bottom;
+
+				span {
+					top: 30%;
+				}
+
+				&::after {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #000;
+					opacity: 0.15;
+				}
+			}
+
+			&-bottom {
+				transform-origin: top;
+				border-radius: 0 0 4px 4px;
+
+				span {
+					top: -70%;
+				}
+			}
+		}
+
+		&-text {
+			margin-top: 1.3em;
+			color: $grayish-blue;
+			font-size: 0.7rem;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+		}
+	}
+
+	&__socials {
+		position: absolute;
+		bottom: 3em;
+		display: flex;
+		gap: 3em;
+
+		&-link {
+			position: relative;
+			text-decoration: none;
+			@include linksActive;
+		}
+	}
+}
+
+@media (min-width: 576px) {
+	.circle {
+		width: 12px;
+		height: 12px;
+	}
+
+	.app {
+		&__heading {
+			font-size: 2.2rem;
+			letter-spacing: 7.5px;
+		}
+
+		&__body {
+			gap: 2em;
+			margin-top: 6.5em;
+
+			&-card {
+				width: 108px;
+				height: 110px;
+				border-radius: 8px;
+
+				&-bottom,
+				&-top {
+					height: 50px;
+
+					span {
+						font-size: 6rem;
+					}
+				}
+
+				&-bottom {
+					border-radius: 0 0 8px 8px;
+				}
+			}
+
+			&-text {
+				margin-top: 1.2em;
+				font-size: 1.2rem;
+				letter-spacing: 4px;
+			}
+		}
+	}
+}
+@media (min-width: 992px) {
+	.app {
+		padding-top: 8.2em;
+		background-size: contain;
+
+		&__body {
+			&-card {
+				width: 148px;
+				height: 150px;
+
+				&-bottom,
+				&-top {
+					height: 70px;
+
+					span {
+						font-size: 8rem;
+					}
+				}
+			}
+
+			&-text {
+				font-size: 1.4rem;
+				letter-spacing: 6px;
+			}
+		}
+	}
+}
+
+@keyframes rotate-top {
+	from {
+		transform: rotateX(0);
+	}
+	to {
+		transform: rotateX(90deg);
+	}
+}
+
+@keyframes rotate-bottom {
+	from {
+		transform: rotateX(90deg);
+	}
+	to {
+		transform: rotateX(0deg);
+	}
+}
