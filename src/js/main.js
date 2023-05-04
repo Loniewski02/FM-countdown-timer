@@ -88,7 +88,7 @@ const closePopup = () => {
 	clearError(dateInput);
 };
 
-const setTime = () => {
+const handleCounter = () => {
 	const currentTime = new Date();
 	const result = usersTime - currentTime;
 
@@ -117,6 +117,10 @@ const setTime = () => {
 			prevDays = days;
 		}
 	}
+
+	//
+	const delay = 1000 - ((new Date().getTime() - currentTime.getTime()) % 1000);
+	setTimeout(handleCounter, delay);
 };
 
 const handleAnimation = (card, time) => {
@@ -126,29 +130,31 @@ const handleAnimation = (card, time) => {
 	const topSpan = top.querySelector('span');
 	const bottomSpan = bottom.querySelector('span');
 
-	setTimeout(() => {
-		topSpan.textContent = time;
+	const onAnimationEndTop = () => {
+		top.classList.remove('animation-top');
+		top.removeEventListener('animationend', onAnimationEndTop);
+		bottom.classList.add('animation-bottom');
+		bottom.addEventListener('animationend', onAnimationEndBottom);
 		bottomSpan.textContent = time;
-	}, 500);
+		topSpan.textContent = time;
+	};
+
+	const onAnimationEndBottom = () => {
+		bottom.classList.remove('animation-bottom');
+		bottom.removeEventListener('animationend', onAnimationEndBottom);
+	};
 
 	top.classList.add('animation-top');
-	bottom.classList.add('animation-bottom');
-
-	top.addEventListener('animationend', () => {
-		top.classList.remove('animation-top');
-	});
-
-	bottom.addEventListener('animationend', () => {
-		bottom.classList.remove('animation-bottom');
-	});
+	top.addEventListener('animationend', onAnimationEndTop);
 };
 
-setInterval(setTime, 1000);
+function main() {
+	handleCounter();
+	closePopupBtn.addEventListener('click', closePopup);
+	settingsBtn.addEventListener('click', () => {
+		popup.classList.add('popup--active');
+	});
+	confirmPopupBtn.addEventListener('click', checkPopup);
+}
 
-closePopupBtn.addEventListener('click', closePopup);
-
-settingsBtn.addEventListener('click', () => {
-	popup.classList.add('popup--active');
-});
-
-confirmPopupBtn.addEventListener('click', checkPopup);
+document.addEventListener('DOMContentLoaded', main);

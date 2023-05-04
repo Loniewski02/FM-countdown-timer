@@ -73,12 +73,13 @@ body {
 }
 
 .animation-bottom {
-	animation: rotate-bottom 0.4s ease-out 0.5s;
+	animation: rotate-bottom 0.5s ease-out;
 }
 
 .animation-top {
 	animation: rotate-top 0.5s ease-in;
 }
+
 .popup {
 	position: fixed;
 	top: 0;
@@ -271,6 +272,7 @@ body {
 			&-bottom,
 			&-top {
 				position: relative;
+				display: block;
 				background-color: $dark-desaturated-blue;
 				height: 33px;
 				display: flex;
@@ -409,19 +411,21 @@ body {
 }
 
 @keyframes rotate-top {
-	from {
+	0% {
 		transform: rotateX(0);
 	}
-	to {
+
+	100% {
 		transform: rotateX(90deg);
 	}
 }
 
 @keyframes rotate-bottom {
-	from {
+	0% {
 		transform: rotateX(90deg);
 	}
-	to {
+
+	100% {
 		transform: rotateX(0deg);
 	}
 }
