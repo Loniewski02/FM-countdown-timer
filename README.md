@@ -29,8 +29,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: https://github.com/Loniewski02/FM-countdown-timer
-- Live Site URL: https://loniewski02.github.io/FM-countdown-timer/
+- Solution URL: [solution](https://www.frontendmentor.io/solutions/countdown-timer-E3QKnSnJ8F)
+- Live Site URL: [live](https://loniewski02.github.io/FM-countdown-timer/)
 
 ## My process
 
